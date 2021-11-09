@@ -6,7 +6,7 @@ with open("README.md", "r") as readme_file:
 requirements = ["numpy"]
 
 setup(
-    name="notebookc",
+    name="PyQAC",
     version="0.0.1",
     author="MajesticWizard",
     author_email="lizardwizardetofake@gmail.com",
