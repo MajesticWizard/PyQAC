@@ -1,14 +1,71 @@
 import numpy as np
 
-Zero = np.matrix([[0,0],[0,0]]) #* complex(1)
-I = np.matrix(([[1,0],[0,1]])) * complex(1)
-X = np.matrix([[0,1],[1,0]])#* complex(1)
-H = np.matrix([[1,1],[1,-1]]) * complex(1/np.sqrt(2))
-Y = np.matrix([[complex(0),complex(0,-1)],[complex(0,1), complex(0)]])
-Z = np.matrix([[1,0],[0,-1]]) * complex(1)
+Zero = np.matrix([[0, 0],
+                  [0, 0]]) #* complex(1)
+I = np.matrix(([[1, 0],
+                [0, 1]])) * complex(1)
+X = np.matrix([[0, 1],
+               [1, 0]])#* complex(1)
+H = np.matrix([[1, 1],
+               [1, -1]]) * complex(1/np.sqrt(2))
+Y = np.matrix([[complex(0), complex(0,-1)],
+               [complex(0,1), complex(0)]])
+Z = np.matrix([[1, 0],
+               [0, -1]]) * complex(1)
+srn = np.matrix([[complex(0.5, 0.5), complex(0.5, -0.5)],
+                 [complex(0.5, -0.5), complex(0.5, 0.5)]])
+srndg = np.matrix([[complex(0.5, -0.5), complex(0.5, 0.5)],
+                   [complex(0.5, 0.5), complex(0.5, -0.5)]])
+r2 = np.matrix([[1, 0],
+                [0, np.e ** complex(0, np.pi / 2)]])
+r4 = np.matrix([[1, 0],
+                [0, np.e ** complex(0, np.pi / 4)]])
+r8 = np.matrix([[1, 0],
+                [0, np.e ** complex(0, np.pi / 8)]])
+sdg = np.matrix([[1, 0],
+                [0, np.e ** complex(0, -np.pi / 2)]])
+tdg = np.matrix([[1, 0],
+                [0, np.e ** complex(0, -np.pi / 4)]])
+
+
+def rx(theta):
+    matrix = np.matrix([[np.cos(theta / 2), complex(0, -np.sin(theta / 2))],
+                        [complex(0, -np.sin(theta / 2)), np.cos(theta / 2)]])
+    return matrix
+
+
+def ry(theta):
+    matrix = np.matrix([[np.cos(theta / 2), -np.sin(theta / 2)],
+                        [np.sin(theta / 2), np.cos(theta / 2)]])
+    return matrix
+
+
+def rz(phi):
+    matrix = np.matrix([[complex(np.cos(phi / 2), -np.sin(phi / 2)), 0],
+                        [0, complex(np.cos(phi / 2), np.sin(phi / 2))]])
+    return matrix
+
+
+def u1(theta):
+    matrix = np.matrix([[1, 0],
+                        [0, np.e ** complex(0, theta)]])
+    return matrix
+
+
+def u2(theta, phi):
+    matrix = np.matrix([[1/np.sqrt(2), -(np.e ** complex(0, theta)) / np.sqrt(2)],
+                        [(np.e ** complex(0, phi)) / np.sqrt(2), (np.e ** complex(0, theta + phi)) / np.sqrt(2)]])
+    return matrix
+
+
+def u3(theta, phi, lmbda):
+    matrix = np.matrix([[np.cos(theta/2), -(np.e ** complex(0, lmbda)) * np.sin(theta / 2)],
+                        [(np.e ** complex(0, phi)) * np.sin(theta / 2), (np.e ** complex(0, lmbda + phi)) * np.cos(theta / 2)]])
+    return matrix
 
 def n_root_of_1(n):
     return complex(np.cos(np.pi / (2**(n-1))), np.sin(np.pi / (2 ** (n - 1))))
+
 
 def generate_cnot(contoled_bit, control_bits):
     size = max(contoled_bit, max(control_bits))
@@ -104,6 +161,7 @@ def generate_cz(contoled_bit, control_bits):
         # print(temp)
 
     return result_matrix
+
 
 def generate_QFT(n):
     N = 2**n
