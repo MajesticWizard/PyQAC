@@ -163,7 +163,6 @@ def generate_XY(first_q, second_q, phi):
             lst[int(bin_num2, 2)] = complex(0, np.sin(phi/2))
         else:
             lst[int(bin_num1, 2)] = 1
-        print(lst)
         not_np_matrix.append(lst)
     return np.matrix(not_np_matrix).T
 
@@ -220,6 +219,290 @@ def generate_csrn(contoled_bit, control_bits):
     return np.matrix(not_np_matrix).T
 
 
+def generate_cr2(contoled_bit, control_bits):
+    size = max(contoled_bit, max(control_bits)) + 1
+    not_np_matrix = []
+    for i in range(2**size):
+        bin_num = format(i, 'b')
+        for j in range(size - len(bin_num)):
+            bin_num = '0' + bin_num
+        lst = [0 for i in range(2**size)]
+        for control_bit in control_bits:
+            if bin_num[control_bit] == "0":
+                break
+        else:
+            if bin_num[contoled_bit] == '0':
+                lst[int(bin_num, 2)] = 1
+                #lst[int(bin_num[:contoled_bit] + '1' + bin_num[contoled_bit+1:], 2)] = 1/np.sqrt(2)
+            else:
+                lst[int(bin_num, 2)] = np.e ** complex(0, np.pi / 2)
+                #lst[int(bin_num[:contoled_bit] + '0' + bin_num[contoled_bit + 1:], 2)] = 1 / np.sqrt(2)
+            not_np_matrix.append(lst)
+            continue
+        lst[int(bin_num, 2)] = 1
+        not_np_matrix.append(lst)
+
+    return np.matrix(not_np_matrix).T
+
+
+def generate_cr4(contoled_bit, control_bits):
+    size = max(contoled_bit, max(control_bits)) + 1
+    not_np_matrix = []
+    for i in range(2**size):
+        bin_num = format(i, 'b')
+        for j in range(size - len(bin_num)):
+            bin_num = '0' + bin_num
+        lst = [0 for i in range(2**size)]
+        for control_bit in control_bits:
+            if bin_num[control_bit] == "0":
+                break
+        else:
+            if bin_num[contoled_bit] == '0':
+                lst[int(bin_num, 2)] = 1
+                #lst[int(bin_num[:contoled_bit] + '1' + bin_num[contoled_bit+1:], 2)] = 1/np.sqrt(2)
+            else:
+                lst[int(bin_num, 2)] = np.e ** complex(0, np.pi / 4)
+                #lst[int(bin_num[:contoled_bit] + '0' + bin_num[contoled_bit + 1:], 2)] = 1 / np.sqrt(2)
+            not_np_matrix.append(lst)
+            continue
+        lst[int(bin_num, 2)] = 1
+        not_np_matrix.append(lst)
+
+    return np.matrix(not_np_matrix).T
+
+
+def generate_cr8(contoled_bit, control_bits):
+    size = max(contoled_bit, max(control_bits)) + 1
+    not_np_matrix = []
+    for i in range(2**size):
+        bin_num = format(i, 'b')
+        for j in range(size - len(bin_num)):
+            bin_num = '0' + bin_num
+        lst = [0 for i in range(2**size)]
+        for control_bit in control_bits:
+            if bin_num[control_bit] == "0":
+                break
+        else:
+            if bin_num[contoled_bit] == '0':
+                lst[int(bin_num, 2)] = 1
+                #lst[int(bin_num[:contoled_bit] + '1' + bin_num[contoled_bit+1:], 2)] = 1/np.sqrt(2)
+            else:
+                lst[int(bin_num, 2)] = np.e ** complex(0, np.pi / 8)
+                #lst[int(bin_num[:contoled_bit] + '0' + bin_num[contoled_bit + 1:], 2)] = 1 / np.sqrt(2)
+            not_np_matrix.append(lst)
+            continue
+        lst[int(bin_num, 2)] = 1
+        not_np_matrix.append(lst)
+
+    return np.matrix(not_np_matrix).T
+
+
+def generate_crx(contoled_bit, control_bits, theta):
+    size = max(contoled_bit, max(control_bits)) + 1
+    not_np_matrix = []
+    for i in range(2**size):
+        bin_num = format(i, 'b')
+        for j in range(size - len(bin_num)):
+            bin_num = '0' + bin_num
+        lst = [0 for i in range(2**size)]
+        for control_bit in control_bits:
+            if bin_num[control_bit] == "0":
+                break
+        else:
+            if bin_num[contoled_bit] == '0':
+                lst[int(bin_num, 2)] = np.cos(theta / 2)
+                lst[int(bin_num[:contoled_bit] + '1' + bin_num[contoled_bit+1:], 2)] = complex(0, -np.sin(theta/2))
+            else:
+                lst[int(bin_num[:contoled_bit] + '0' + bin_num[contoled_bit + 1:], 2)] = complex(0,-np.sin(theta/2))
+                lst[int(bin_num, 2)] = np.cos(theta / 2)
+            not_np_matrix.append(lst)
+            continue
+        lst[int(bin_num, 2)] = 1
+        not_np_matrix.append(lst)
+
+    return np.matrix(not_np_matrix).T
+
+
+def generate_cry(contoled_bit, control_bits, theta):
+    size = max(contoled_bit, max(control_bits)) + 1
+    not_np_matrix = []
+    for i in range(2**size):
+        bin_num = format(i, 'b')
+        for j in range(size - len(bin_num)):
+            bin_num = '0' + bin_num
+        lst = [0 for i in range(2**size)]
+        for control_bit in control_bits:
+            if bin_num[control_bit] == "0":
+                break
+        else:
+            if bin_num[contoled_bit] == '0':
+                lst[int(bin_num, 2)] = np.cos(theta / 2)
+                lst[int(bin_num[:contoled_bit] + '1' + bin_num[contoled_bit+1:], 2)] = np.sin(theta/2)
+            else:
+                lst[int(bin_num[:contoled_bit] + '0' + bin_num[contoled_bit + 1:], 2)] = -np.sin(theta/2)
+                lst[int(bin_num, 2)] = np.cos(theta / 2)
+            not_np_matrix.append(lst)
+            continue
+        lst[int(bin_num, 2)] = 1
+        not_np_matrix.append(lst)
+
+    return np.matrix(not_np_matrix).T
+
+
+def generate_crz(contoled_bit, control_bits, phi):
+    size = max(contoled_bit, max(control_bits)) + 1
+    not_np_matrix = []
+    for i in range(2**size):
+        bin_num = format(i, 'b')
+        for j in range(size - len(bin_num)):
+            bin_num = '0' + bin_num
+        lst = [0 for i in range(2**size)]
+        for control_bit in control_bits:
+            if bin_num[control_bit] == "0":
+                break
+        else:
+            if bin_num[contoled_bit] == '0':
+                lst[int(bin_num, 2)] = complex(np.cos(phi / 2), -np.sin(phi/2))
+                #lst[int(bin_num[:contoled_bit] + '1' + bin_num[contoled_bit+1:], 2)] = complex(0, -np.sin(theta/2))
+            else:
+                #lst[int(bin_num[:contoled_bit] + '0' + bin_num[contoled_bit + 1:], 2)] = complex(0,-np.sin(theta/2))
+                lst[int(bin_num, 2)] = complex(np.cos(phi / 2), np.sin(phi/2))
+            not_np_matrix.append(lst)
+            continue
+        lst[int(bin_num, 2)] = 1
+        not_np_matrix.append(lst)
+    return np.matrix(not_np_matrix).T
+
+
+def generate_cu1(contoled_bit, control_bits, theta):
+    size = max(contoled_bit, max(control_bits)) + 1
+    not_np_matrix = []
+    for i in range(2**size):
+        bin_num = format(i, 'b')
+        for j in range(size - len(bin_num)):
+            bin_num = '0' + bin_num
+        lst = [0 for i in range(2**size)]
+        for control_bit in control_bits:
+            if bin_num[control_bit] == "0":
+                break
+        else:
+            if bin_num[contoled_bit] == '0':
+                lst[int(bin_num, 2)] = 1
+                #lst[int(bin_num[:contoled_bit] + '1' + bin_num[contoled_bit+1:], 2)] = complex(0, -np.sin(theta/2))
+            else:
+                #lst[int(bin_num[:contoled_bit] + '0' + bin_num[contoled_bit + 1:], 2)] = complex(0,-np.sin(theta/2))
+                lst[int(bin_num, 2)] = np.e ** complex(0,theta)
+            not_np_matrix.append(lst)
+            continue
+        lst[int(bin_num, 2)] = 1
+        not_np_matrix.append(lst)
+    return np.matrix(not_np_matrix).T
+
+
+def generate_cu2(contoled_bit, control_bits, angles):
+    size = max(contoled_bit, max(control_bits)) + 1
+    not_np_matrix = []
+    for i in range(2**size):
+        bin_num = format(i, 'b')
+        for j in range(size - len(bin_num)):
+            bin_num = '0' + bin_num
+        lst = [0 for i in range(2**size)]
+        for control_bit in control_bits:
+            if bin_num[control_bit] == "0":
+                break
+        else:
+            if bin_num[contoled_bit] == '0':
+                lst[int(bin_num, 2)] = 1 / np.sqrt(2)
+                lst[int(bin_num[:contoled_bit] + '1' + bin_num[contoled_bit+1:], 2)] = np.e ** complex(0, angles[0]) \
+                                                                                       / np.sqrt(2)
+            else:
+                lst[int(bin_num[:contoled_bit] + '0' + bin_num[contoled_bit + 1:], 2)] = -np.e ** complex(0, angles[1])\
+                                                                                       / np.sqrt(2)
+                lst[int(bin_num, 2)] = np.e ** complex(0, angles[0] + angles[1]) / np.sqrt(2)
+            not_np_matrix.append(lst)
+            continue
+        lst[int(bin_num, 2)] = 1
+        not_np_matrix.append(lst)
+    return np.matrix(not_np_matrix).T
+
+
+def generate_cu3(contoled_bit, control_bits, angles):
+    size = max(contoled_bit, max(control_bits)) + 1
+    not_np_matrix = []
+    for i in range(2**size):
+        bin_num = format(i, 'b')
+        for j in range(size - len(bin_num)):
+            bin_num = '0' + bin_num
+        lst = [0 for i in range(2**size)]
+        for control_bit in control_bits:
+            if bin_num[control_bit] == "0":
+                break
+        else:
+            if bin_num[contoled_bit] == '0':
+                lst[int(bin_num, 2)] = np.cos(angles[0])
+                lst[int(bin_num[:contoled_bit] + '1' + bin_num[contoled_bit+1:], 2)] = np.e ** complex(0, angles[1]) \
+                                                                                       * np.sin(angles[0] / 2)
+            else:
+                lst[int(bin_num[:contoled_bit] + '0' + bin_num[contoled_bit + 1:], 2)] = -np.e ** complex(0, angles[2])\
+                                                                                       * np.sin(angles[0] / 2)
+                lst[int(bin_num, 2)] = np.e ** complex(0, angles[2] + angles[1]) * np.cos(angles[0] / 2)
+            not_np_matrix.append(lst)
+            continue
+        lst[int(bin_num, 2)] = 1
+        not_np_matrix.append(lst)
+    return np.matrix(not_np_matrix).T
+
+
+def generate_csdg(contoled_bit, control_bits):
+    size = max(contoled_bit, max(control_bits)) + 1
+    not_np_matrix = []
+    for i in range(2**size):
+        bin_num = format(i, 'b')
+        for j in range(size - len(bin_num)):
+            bin_num = '0' + bin_num
+        lst = [0 for i in range(2**size)]
+        for control_bit in control_bits:
+            if bin_num[control_bit] == "0":
+                break
+        else:
+            if bin_num[contoled_bit] == '0':
+                lst[int(bin_num, 2)] = 1
+                #lst[int(bin_num[:contoled_bit] + '1' + bin_num[contoled_bit+1:], 2)] = complex(0, -np.sin(theta/2))
+            else:
+                #lst[int(bin_num[:contoled_bit] + '0' + bin_num[contoled_bit + 1:], 2)] = complex(0,-np.sin(theta/2))
+                lst[int(bin_num, 2)] = np.e ** complex(0,-np.pi/2)
+            not_np_matrix.append(lst)
+            continue
+        lst[int(bin_num, 2)] = 1
+        not_np_matrix.append(lst)
+    return np.matrix(not_np_matrix).T
+
+
+def generate_ctdg(contoled_bit, control_bits):
+    size = max(contoled_bit, max(control_bits)) + 1
+    not_np_matrix = []
+    for i in range(2**size):
+        bin_num = format(i, 'b')
+        for j in range(size - len(bin_num)):
+            bin_num = '0' + bin_num
+        lst = [0 for i in range(2**size)]
+        for control_bit in control_bits:
+            if bin_num[control_bit] == "0":
+                break
+        else:
+            if bin_num[contoled_bit] == '0':
+                lst[int(bin_num, 2)] = 1
+                #lst[int(bin_num[:contoled_bit] + '1' + bin_num[contoled_bit+1:], 2)] = complex(0, -np.sin(theta/2))
+            else:
+                #lst[int(bin_num[:contoled_bit] + '0' + bin_num[contoled_bit + 1:], 2)] = complex(0,-np.sin(theta/2))
+                lst[int(bin_num, 2)] = np.e ** complex(0,-np.pi/4)
+            not_np_matrix.append(lst)
+            continue
+        lst[int(bin_num, 2)] = 1
+        not_np_matrix.append(lst)
+    return np.matrix(not_np_matrix).T
+
+
 def generate_cy(contoled_bit, control_bits):
     size = max(contoled_bit, max(control_bits))
     result_matrix = I
@@ -251,6 +534,8 @@ def generate_cy(contoled_bit, control_bits):
     return result_matrix
 
 
+
+
 def generate_cz(contoled_bit, control_bits):
     size = max(contoled_bit, max(control_bits))
     result_matrix = I
@@ -280,6 +565,55 @@ def generate_cz(contoled_bit, control_bits):
 
 
     return result_matrix
+
+
+def generate_cswap(bit_swap1, bit_swap2, control_bits):
+    size = max(bit_swap1, bit_swap2, max(control_bits)) + 1
+    not_np_matrix = []
+    for i in range(2**size):
+        bin_num = format(i, 'b')
+        for j in range(size - len(bin_num)):
+            bin_num = '0' + bin_num
+        lst = [0 for i in range(2**size)]
+        for control_bit in control_bits:
+            if bin_num[bit_swap1] == bin_num[bit_swap2]:
+                break
+            if bin_num[control_bit] == "0":
+                break
+        else:
+            bin_num = bin_num[:bit_swap1] + bin_num[bit_swap2] + bin_num[bit_swap1+1:bit_swap2] + bin_num[bit_swap1] + \
+                      bin_num[bit_swap2+1::]
+            lst[int(bin_num, 2)] = 1
+            not_np_matrix.append(lst)
+            continue
+        lst[int(bin_num, 2)] = 1
+        not_np_matrix.append(lst)
+    return np.matrix(not_np_matrix).T
+
+
+def generate_csrswap(bit_swap1, bit_swap2, control_bits):
+    size = max(bit_swap1, bit_swap2, max(control_bits)) + 1
+    not_np_matrix = []
+    for i in range(2**size):
+        bin_num = format(i, 'b')
+        for j in range(size - len(bin_num)):
+            bin_num = '0' + bin_num
+        lst = [0 for i in range(2**size)]
+        for control_bit in control_bits:
+            if bin_num[bit_swap1] == bin_num[bit_swap2]:
+                break
+            if bin_num[control_bit] == "0":
+                break
+        else:
+            lst[int(bin_num,2)] = complex(0.5,0.5)
+            bin_num = bin_num[:bit_swap1] + bin_num[bit_swap2] + bin_num[bit_swap1+1:bit_swap2] + bin_num[bit_swap1] + \
+                      bin_num[bit_swap2+1::]
+            lst[int(bin_num, 2)] = complex(0.5,-0.5)
+            not_np_matrix.append(lst)
+            continue
+        lst[int(bin_num, 2)] = 1
+        not_np_matrix.append(lst)
+    return np.matrix(not_np_matrix).T
 
 
 def generate_QFT(n):
@@ -322,4 +656,6 @@ def generate_pow_matrix(n,B,R): #B**A mod R, n is number of qubits used as input
 
 
 if __name__ == "__main__":
-    print(generate_csrn(1,[0]))
+    print(generate_crswap(1,2,[0]))
+    #print(generate_ch(1,[0,2,3,4,5,6,7,8,9,10,11]))
+    #print(generate_cy(1,[0,2,3,4,5,6,7,8,9,10,11]))

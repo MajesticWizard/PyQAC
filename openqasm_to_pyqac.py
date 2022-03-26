@@ -1,7 +1,7 @@
 import re
 
-script = open("test.txt", "r")
-new_script = open("script.py", "w+")
+script = open("qasm_script.txt", "r")
+new_script = open("pyqac_script.py", "w+")
 new_script.write("import PyQAC.Quant as pq\n\n")
 script.readline()
 script.readline()
