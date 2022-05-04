@@ -33,7 +33,8 @@ class QuantumVector: # maximum number of qubits is 12
     def result_vector(self):
         return (self.vector * self.final_gate()).tolist()[0]
 
-    def probabilities(self, position, size):
+    def probabilities(self, position=0, sz=-1):
+        if sz <= 0: sz = self.size
         res = [0 for i in range(2**size)]#{i:0 for i in range(2**size)}
         vector = self.result_vector()
         for i in range(len(vector)):

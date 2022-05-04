@@ -27,7 +27,7 @@ for line in script:
                 params_gate = match[0]
             elif "q" in param:
                 controling_bits.append(int(match[0]))
-            else:
+            else:MajesticWizard/PyQAC
                 params_gate.insert(0, int(match[0]))
         if controling_bits:
             params_function += str(controling_bits) + ", "
@@ -38,5 +38,6 @@ for line in script:
         prefix = "cnot"
     new_script.write("q.add_" + prefix + params_function + "\n")
 new_script.write("vector = q.result_vector() \n")
+new_script.write("prob = q.probabilities() \n")
 new_script.write("num = q.return_random_vector() \n")
-new_script.write('res = {"res_vector": vector, "res_num": num}')
+new_script.write('res = {"res_vector": vector, "probabilities": prob, "res_num": num}')
