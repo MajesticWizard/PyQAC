@@ -27,7 +27,7 @@ for line in script:
                 params_gate = match[0]
             elif "q" in param:
                 controling_bits.append(int(match[0]))
-            else:MajesticWizard/PyQAC
+            else:
                 params_gate.insert(0, int(match[0]))
         if controling_bits:
             params_function += str(controling_bits) + ", "
