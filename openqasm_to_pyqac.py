@@ -45,6 +45,3 @@ def main(path):
     new_script += 'res = {"res_vector": vector, "probabilities": prob, "res_num": num}'
     return new_script
 
-
-if __name__ == "__main__":
-    print(main("test.txt"))

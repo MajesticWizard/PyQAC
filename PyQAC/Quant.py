@@ -35,10 +35,10 @@ class QuantumVector: # maximum number of qubits is 12
 
     def probabilities(self, position=0, sz=-1):
         if sz <= 0: sz = self.size
-        res = [0 for i in range(2**size)]#{i:0 for i in range(2**size)}
+        res = [0 for i in range(2**sz)]#{i:0 for i in range(2**size)}
         vector = self.result_vector()
         for i in range(len(vector)):
-            res[(i//2**position)%2**size] += complex_modulus(vector[i])**2
+            res[(i//2**position)%2**sz] += complex_modulus(vector[i])**2
         return res
 
     def return_random_vector(self, position=0, sz=-1):
