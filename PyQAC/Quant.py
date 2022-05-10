@@ -51,6 +51,20 @@ class QuantumVector: # maximum number of qubits is 12
             if rand < sum:
                 return i
 
+    def add_id(self, position, ops=-1):
+        if ops >= 0:
+            if np.all(self.gates[ops][position] == mg.I):
+                self.gates[ops][position] = mg.I
+            else:
+                raise GateError('GateError: Gate is already occupied')
+        else:
+            for i in range(len(self.gates)):
+                if np.array_equal(self.gates[i][position], mg.I):
+                    self.gates[i][position] = mg.I
+                    return None
+            self.gates.append([mg.I for i in range(self.size)])
+            self.gates[len(self.gates) - 1][position] = mg.I
+
     def add_h(self, position, ops=-1):
         if ops >= 0:
             if np.all(self.gates[ops][position] == mg.I):
@@ -946,9 +960,8 @@ class QuantumVector: # maximum number of qubits is 12
 
 if __name__ == '__main__':
     q = QuantumVector(2)
-    q.add_h(0)
-    q.add_h(1)
-    print(q.ret)
+    q.add_id(0)
+    print(q.result_vector())
     #обычный алгоритм Шора
    # q1 = QuantumVector(12)
   #  for i in range(6):

@@ -656,6 +656,6 @@ def generate_pow_matrix(n,B,R): #B**A mod R, n is number of qubits used as input
 
 
 if __name__ == "__main__":
-    print(generate_crswap(1,2,[0]))
+    print(generate_swap(1,4))
     #print(generate_ch(1,[0,2,3,4,5,6,7,8,9,10,11]))
     #print(generate_cy(1,[0,2,3,4,5,6,7,8,9,10,11]))
